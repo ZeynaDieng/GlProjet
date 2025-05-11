@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+/* @import "tailwindcss";
+@import "tailwindcss/base";
+@import "tailwindcss/components"; */
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* @tailwind base;
+@tailwind utilities; 
+@tailwind components; ✅ */
+@import "tailwindcss/preflight"; /* remplace @tailwind base */
+@import "tailwindcss/utilities"; /* remplace @tailwind utilities */
+@import "tailwindcss/components"; /* remplace @tailwind components */
+@import "tailwindcss/forms"; /* ✅ */
+@import "tailwindcss/typography"; /* ✅ */
+@import "tailwindcss/aspect-ratio"; /* ✅ */

@@ -1,0 +1,41 @@
+<section id="banner" class="relative overflow-hidden bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 text-white py-24 md:py-32">
+  <!-- Fond animé -->
+  <div class="absolute inset-0 z-0">
+    <div class="absolute inset-0 bg-[url('assets/images/wax-pattern.png')] bg-[length:300px] opacity-10 animate-[pan_30s_linear_infinite]"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-blue-700/20 to-blue-500/30"></div>
+  </div>
+
+  <div class="container mx-auto px-6 relative z-10 text-center">
+    <!-- Titre avec animation -->
+    <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 fade-in-up">
+      <span class="text-yellow-300">Élégance</span> Sénégalaise
+    </h1>
+    
+    <!-- Sous-titre -->
+    <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto leading-relaxed animate-[fadeInUp_1.2s_ease-out]">
+      Découvrez l'art vestimentaire africain à travers nos créations <span class="font-semibold text-yellow-200">uniques</span> et <span class="font-semibold text-yellow-200">authentiques</span>
+    </p>
+    
+    <!-- Bouton CTA animé -->
+    <button 
+      (click)="navigateToBoutique()"
+      class="relative overflow-hidden group bg-white text-blue-600 px-8 py-4 rounded-full font-bold hover:bg-blue-50 transition-all duration-500 shadow-xl hover:shadow-2xl animate-[bounce_2s_infinite]"
+    >
+      <span class="relative z-10 flex cursor-pointer items-center justify-center">
+        Explorer la collection
+        <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+        </svg>
+      </span>
+      <span class="absolute inset-0 bg-yellow-400 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
+    </button>
+    
+    <div class="mt-16 flex justify-center space-x-4 animate-[fadeIn_2s_ease-out]">
+      <div class="w-3 h-3 rounded-full bg-yellow-300"></div>
+      <div class="w-3 h-3 rounded-full bg-white"></div>
+      <div class="w-3 h-3 rounded-full bg-green-300"></div>
+    </div>
+  </div>
+
+  <img src="assets/modelSenegalaise.png" alt="Modèle sénégalaise" class="absolute right-10 bottom-0 h-[70%] object-contain hidden lg:block animate-[fadeInRight_1.5s_ease-out]">
+</section>

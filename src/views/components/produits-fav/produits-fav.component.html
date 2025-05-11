@@ -1,0 +1,58 @@
+<section id="produitsFav" class="py-12">
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center mb-12 text-blue-800">Produits Tendance</h2>
+  
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Skeletons affichés pendant le chargement -->
+        <ng-container *ngIf="isLoading; else productList">
+          <div *ngFor="let s of [1,2,3,4]" class="animate-pulse bg-white rounded-lg shadow-md overflow-hidden border border-blue-100">
+            <div class="h-64 bg-gray-200 w-full"></div>
+            <div class="p-4 space-y-2">
+              <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+              <div class="h-3 bg-gray-200 rounded w-full"></div>
+              <div class="flex justify-between items-center mt-4">
+                <div class="h-4 bg-gray-200 rounded w-1/2"></div>
+                <div class="h-8 w-8 bg-gray-200 rounded-full"></div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+  
+        <!-- Liste réelle des produits -->
+        <ng-template #productList>
+          <div *ngFor="let product of products" class="bg-white cursor-pointer rounded-lg shadow-md overflow-hidden hover:shadow-xl transition duration-300">
+            <div class="relative">
+              <img [src]="product.imageUrl" [alt]="product.name" class="w-full h-64 object-cover">
+  
+              <span *ngIf="product.isNew" class="absolute top-2 right-2 bg-blue-600 text-white text-xs px-2 py-1 rounded animate-bounce">
+                Nouveau
+              </span>
+  
+              <span *ngIf="product.discount" class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">
+                -{{product.discount}}%
+              </span>
+            </div>
+  
+            <div class="p-4">
+              <h3 class="font-semibold text-lg">{{product.name}}</h3>
+              <p class="text-gray-600 mb-2">{{product.description}}</p>
+              <div class="flex justify-between items-center">
+                <div>
+                  <span *ngIf="product.discount" class="text-gray-400 text-sm line-through mr-2">
+                    {{product.price | number}} {{product.currency}}
+                  </span>
+                  <span class="font-bold" [ngClass]="{'text-blue-600': !product.discount, 'text-red-500': product.discount}">
+                    {{ getDiscountedPrice(product) || product.price | number }} {{product.currency}}
+                  </span>
+                </div>
+                <button class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition">
+                  <i class="fas fa-cart-plus"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </section>
+  

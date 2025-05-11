@@ -1,0 +1,85 @@
+<!-- Produits Vedettes Section -->
+<section id="produits" class="py-16 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="flex justify-between items-center mb-12">
+        <h2 class="text-3xl font-bold text-blue-800">Nos Produits Vedettes</h2>
+        <button routerLink="/boutique" (click)="navigateToBoutique()" class="text-blue-500 border-2 border-blue-500 py-2 px-4 rounded-xl cursor-pointer bg-blue-50 hover:text-blue-700 font-medium flex items-center transition-colors">
+          Voir tout <i class="fas fa-arrow-right ml-2"></i>
+        </button>
+      </div>
+  
+      <!-- Grid des produits ou des skeletons -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+  
+        <!-- SKELETONS (chargement) -->
+        <ng-container *ngIf="isLoading">
+          <div *ngFor="let _ of [1,2,3,4]" class="bg-gray-100 rounded-xl animate-pulse p-4 space-y-4">
+            <div class="h-64 bg-gray-300 rounded-md"></div>
+            <div class="h-4 bg-gray-300 rounded w-3/4"></div>
+            <div class="h-3 bg-gray-300 rounded w-5/6"></div>
+            <div class="flex items-center space-x-2">
+              <div class="h-4 w-4 bg-gray-300 rounded-full" *ngFor="let _ of [1,2,3,4,5]"></div>
+            </div>
+            <div class="flex justify-between items-center mt-4">
+              <div class="h-4 w-1/3 bg-gray-300 rounded"></div>
+              <div class="h-8 w-8 bg-gray-300 rounded-full"></div>
+            </div>
+          </div>
+        </ng-container>
+  
+        <!-- Affichage réel des produits -->
+        <ng-container *ngIf="!isLoading">
+          <div *ngFor="let product of products"
+               class="group relative bg-white rounded-xl cursor-pointer shadow-md overflow-hidden hover:shadow-xl transition duration-300 border border-blue-50 hover:border-blue-100">
+            <!-- Image -->
+            <div class="relative">
+              <img [src]="product.imageUrl" [alt]="product.name"
+                   class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105">
+              <!-- Badges -->
+              <div class="absolute top-3 right-3 space-y-2">
+                <span *ngIf="product.discount" class="block bg-blue-500 text-white text-xs px-2 py-1 rounded-full animate-ping">
+                  -{{product.discount}}%
+                </span>
+                <span *ngIf="product.isNew" class="block bg-green-500 text-white text-xs px-2 py-1 rounded-full animate-bounce">
+                  Nouveau
+                </span>
+              </div>
+            </div>
+  
+            <!-- Infos produit -->
+            <div class="p-4">
+              <h3 class="font-semibold text-lg text-blue-800 mb-1">{{product.name}}</h3>
+              <p class="text-gray-600 text-sm mb-3">{{product.description}}</p>
+  
+              <div class="flex items-center mb-3">
+                <div class="flex mr-2">
+                  <span *ngFor="let star of getStars(product.rating)" class="text-sm">
+                    <i *ngIf="star === 'full'" class="fas fa-star text-yellow-400"></i>
+                    <i *ngIf="star === 'half'" class="fas fa-star-half-alt text-yellow-400"></i>
+                    <i *ngIf="star === 'empty'" class="far fa-star text-yellow-400"></i>
+                  </span>
+                </div>
+                <span class="text-blue-500 text-sm">({{product.reviewCount}})</span>
+              </div>
+  
+              <div class="flex justify-between items-center">
+                <div>
+                  <span class="text-blue-600 font-bold">
+                    {{product.price | number}} {{product.currency}}
+                  </span>
+                  <span *ngIf="product.originalPrice" class="text-gray-400 text-sm line-through ml-2">
+                    {{product.originalPrice | number}} {{product.currency}}
+                  </span>
+                </div>
+                <button class="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 transition-colors">
+                  <i class="fas fa-cart-plus"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+  
+      </div>
+    </div>
+  </section>
+  
