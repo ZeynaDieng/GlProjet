@@ -18,15 +18,17 @@ export class CustomerService {
     
   users$ = this.usersSubject.asObservable(); 
   constructor(private apiService: ApiService) {}
-  getMyPaternList(filters: any = {}): Observable<any> {
-    let params = new HttpParams();
-    for (const key in filters) {
-      if (filters[key]) {
-        params = params.set(key, filters[key]); 
-      }
-    }
-    return this.apiService.get('organisations/list/admin?', { params });
+  getProductsList(filters: any = {}): Observable<any> {
+    const accessToken = getLocalData('accessToken');
+  
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    });
+  
+    return this.apiService.get('products', { headers });
   }
+  
   // getMyConsultantsList(): Observable<any> {
   //   return this.apiService.get('visitors/list');
   // }
@@ -40,7 +42,7 @@ export class CustomerService {
       Authorization: `Bearer ${accessToken}`,
     });
   
-    return this.apiService.post('visitors/create', userData, { headers }).pipe(
+    return this.apiService.post('products', userData, { headers }).pipe(
       catchError((error) => {
         console.error('API Error:', error);
         throw error; 
@@ -50,7 +52,7 @@ export class CustomerService {
 
 
   
-  updateUser(userId: number, userData: { status: boolean }): Observable<any> {
+  updateProduct(productId: number, userData: { status: boolean }): Observable<any> {
     const accessToken = this.getAccessToken();
     
     if (!accessToken) {
@@ -66,12 +68,9 @@ export class CustomerService {
       status: userData.status 
     };
   
-    // Debug logs
-    console.log('Envoi de la requête Put à:', `organisations/status/${userId}/admin`);
-    console.log('Données envoyées:', body);
-    console.log('Headers:', headers);
+   
   
-    return this.apiService.put(`organisations/status/${userId}/admin`, body, { headers }).pipe(
+    return this.apiService.put(`products/${productId}`, body, { headers }).pipe(
       catchError((error) => {
         console.error('Erreur API détaillée:', {
           status: error.status,
@@ -109,7 +108,22 @@ export class CustomerService {
     }
   }
 
-  deleteUser(userId: number): Observable<any> {
-    return this.apiService.delete(`visitors/${userId}/delete`);
+  deleteProduct(productId: number): Observable<any> {
+    const accessToken = getLocalData('accessToken');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    });
+  
+    return this.apiService.delete(`products/${productId}`, { headers }).pipe(
+      catchError((error) => {
+        console.error('Erreur API :', error);
+        return throwError(() => error);
+      })
+    );
   }
-}
+  
+   
+  
+  
+}    

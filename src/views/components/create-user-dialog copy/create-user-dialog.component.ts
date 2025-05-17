@@ -6,7 +6,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ServicesService } from '../../../services/services.service';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { ToastService } from '../../../services/toastr.service';
 import { CommonModule } from '@angular/common';
@@ -37,7 +36,6 @@ export class CreateUserDialogComponent {
     private dialogRef: MatDialogRef<CreateUserDialogComponent>,
     private fb: FormBuilder,
     private userService: UserService, 
-    private servicesService: ServicesService,
     private spinner: NgxSpinnerService,
     private toast: ToastService
   ) 
@@ -78,7 +76,7 @@ export class CreateUserDialogComponent {
       
       if (this.createUserForm.valid) {
         const userData = this.createUserForm.value;
-        console.log('Données utilisateur:', userData);
+        console.log('Données produits:', userData);
     
         if (this.isEditing && this.currentUserId) {
           this.userService.updateUser(this.currentUserId, userData).subscribe({

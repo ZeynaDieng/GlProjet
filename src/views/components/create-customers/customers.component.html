@@ -3,7 +3,7 @@
 >
   <div class="flex justify-between items-center p-4 border-b">
     <h2 class="text-lg font-bold">
-      {{ isEditing ? "Modifier visiteur" : "Nouvel visiteur" }}
+      {{ isEditing ? "Modifier produit" : "Nouvel produit" }}
     </h2>
     <button (click)="closeDialog()" class="text-gray-500 hover:text-gray-700">
       <div class="px-4 py-2 rounded border-1">✖</div>
@@ -12,63 +12,80 @@
   <form [formGroup]="createUserForm" (ngSubmit)="onSubmitUser()">
     <div class="flex flex-col p-6 gap-2 w-full">
       <div>
-        <p class="text-sm">Prénom & Nom</p>
+        <p class="text-sm">Image</p>
+        <!-- <input
+          type="file"
+          formControlName="image"
+          class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 w-full"
+        /> -->
+
+        <input
+  type="file"
+  (change)="onFileSelected($event)"
+  class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 w-full"
+/>
+
+      </div>
+
+      <div>
+        <p class="text-sm">Nom de l'article</p>
         <input
           type="text"
           formControlName="name"
           class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 w-full"
-          placeholder="Seynabou Dieng"
+          placeholder="Boubou africain"
         />
       </div>
 
       <div>
-        <p class="text-sm">Email</p>
-        <input
-          type="email"
-          formControlName="email"
-          class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 w-full"
-          placeholder="zeynash1@gmail.com"
-        />
-      </div>
-
-      <div>
-        <p class="text-sm">Numéro de téléphone</p>
+        <p class="text-sm">Déscription de l'article</p>
         <input
           type="text"
-          formControlName="phone"
+          formControlName="description"
           class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 w-full"
-          placeholder="771000009"
+          placeholder="Boubou africain"
         />
       </div>
 
       <div>
-        <p class="text-sm">Carte d'identité Nationnal</p>
+        <p class="text-sm">Prix de l'article</p>
         <input
-          type="text"
-          formControlName="cin"
+          type="number"
+          formControlName="price"
           class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 w-full"
           placeholder="222222222222222"
         />
       </div>
 
       <div>
-        <p class="text-sm">Qualité</p>
+        <p class="text-sm">Stock</p>
         <input
-          type="text"
-          formControlName="qualite"
+          type="number"
+          formControlName="stock"
           class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 w-full"
-          placeholder="DG"
+          placeholder="222222222222222"
         />
       </div>
-    </div>
+      <!-- <div>
+        <p class="text-sm">Ajouter par</p>
+        <input
+          type="text"
+          formControlName="owner.name"
+          class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 w-full"
+          placeholder="Halimatou Laye"
+        />
+    </div> -->
 
     <div class="mt-2 items-center mx-10">
       <button
-        class="bg-blue-500 w-full text-white rounded cursor-pointer px-6 py-2 cursor-pointer"
+        class="bg-blue-500 w-full text-white rounded px-6 py-2 cursor-pointer"
         type="submit"
       >
-        Enregistrer le visiteur
+        Enregistrer le produit
       </button>
     </div>
+    </div>
+  
+
   </form>
 </div>

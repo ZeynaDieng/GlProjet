@@ -14,7 +14,6 @@ import { LoginComponent } from '../views/pages/login/login.component';
 import { CustomersComponent } from '../views/pages/customers/customers.component';
 import { DetailUserComponent } from '../views/components/detail-user/detail-user.component';
 import { SideNavBarComponent } from '../views/components/side-nav-bar/side-nav-bar.component';
-import { OverviewComponent } from '../views/pages/overview/overview.component';
 import { BuyComponent } from '../views/pages/buy/buy.component';
 import { ShopComponent } from '../views/pages/shop/shop.component';
 
@@ -30,22 +29,15 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    // canActivate: [authGuard],
-    data: { role: 'admin' },
+   
   },
   {
     path: '',
     component: SideNavBarComponent, // Composant contenant le sidebar
-    // canActivate: [authGuard],
     children: [
       {
-       
-
-        path: 'overview',
-        component: OverviewComponent,
-        data: { role: 'admin' },
-
-
+        path: 'partners',
+        component:CustomersComponent,
       },  
       
       //page de presentation des produits
@@ -54,7 +46,6 @@ export const routes: Routes = [
 
         path: '',
         component: BuyComponent,
-        data: { role: 'admin' },
 
 
       },
@@ -62,15 +53,13 @@ export const routes: Routes = [
       {
         path: 'partners',
         component:CustomersComponent,
-        data: { role: 'admin' },
       },
    
 
       {
         path: 'detailUser/:id',
         component: DetailUserComponent,
-        // canActivate: [roleGuard],
-        // data: { role: 'admin' },
+       
       },
     ],
   },

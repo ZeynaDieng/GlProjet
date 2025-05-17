@@ -1,0 +1,9 @@
+{
+    "/api": {
+      "target": "https://eshop.irwc6611.odns.fr/public/api",
+      "secure": false,
+      "changeOrigin": true,
+      "logLevel": "debug"
+    }
+  }
+  

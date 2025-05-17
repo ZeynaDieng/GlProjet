@@ -62,10 +62,10 @@ export class SideNavBarComponent {
     return category == OrganisationCategory.provider;
   }
 
-  isOwner() {
-    const role = this.authService.getUserRole();
-    return role == UserRoles.owner;
-  }
+  // isOwner() {
+  //   const role = this.authService.getUserRole();
+  //   return role == UserRoles.owner;
+  // }
 
   toggleProfileMenu(event: MouseEvent) {
     event.stopPropagation();

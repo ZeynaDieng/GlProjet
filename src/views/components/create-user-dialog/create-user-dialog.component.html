@@ -12,12 +12,12 @@
   <form [formGroup]="createUserForm" (ngSubmit)="onSubmitUser()">
     <div class="flex flex-col p-6 gap-2 w-full">
       <div>
-        <p class="text-sm">Prénom</p>
+        <p class="text-sm">Image</p>
         <input
-          type="text"
-          formControlName="first_name"
+          type="file"
+          formControlName="image"
           class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 w-full"
-          placeholder="Halimatou"
+     
         />
       </div>
 
