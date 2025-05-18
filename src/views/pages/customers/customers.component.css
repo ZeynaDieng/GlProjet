@@ -1,3 +1,10 @@
 .custom-shadow {
     box-shadow: 0px 4px 18px 0px #4B465C1A;
   }
+
+
+
+  .cursor-pointer:hover svg path {
+    stroke: #3a7bd5;
+    transition: stroke 0.2s ease;
+  }

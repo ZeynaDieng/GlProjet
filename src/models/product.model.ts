@@ -6,5 +6,5 @@ export interface Product {
     currency: string;
     imageUrl: string;
     isNew: boolean;
-    discount?: number; // Optionnel pour les promotions
+    discount?: number; 
   }

@@ -19,10 +19,13 @@ export class ProduitsComponent implements OnInit {
   ngOnInit(): void {
     setTimeout(() => {
       this.isLoading = false;
-    }, 1000); // délai simulé de 2 secondes
+    }, 1000); 
   }
   
 
+
+ 
+  
   products: ProductModern[] = [
     {
       id: 1,

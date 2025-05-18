@@ -16,9 +16,11 @@ import { DetailUserComponent } from '../views/components/detail-user/detail-user
 import { SideNavBarComponent } from '../views/components/side-nav-bar/side-nav-bar.component';
 import { BuyComponent } from '../views/pages/buy/buy.component';
 import { ShopComponent } from '../views/pages/shop/shop.component';
+import { ProductViewDialogComponent } from '../views/components/product-view-dialog/product-view-dialog.component';
 
 export const routes: Routes = [
-  { path: '', component: BuyComponent }, 
+  // { path: '', component: BuyComponent }, 
+  { path: '', component: LoginComponent }, 
   { path: 'produits', component: BuyComponent },
   { path: 'produitsFav', component: BuyComponent },
   { path: 'catégories', component: BuyComponent },
@@ -45,7 +47,7 @@ export const routes: Routes = [
        
 
         path: '',
-        component: BuyComponent,
+        component: LoginComponent,
 
 
       },
@@ -57,10 +59,12 @@ export const routes: Routes = [
    
 
       {
-        path: 'detailUser/:id',
-        component: DetailUserComponent,
+        path: 'detailProduct/:id',
+        component: ProductViewDialogComponent,
        
       },
+    
+   
     ],
   },
 ];

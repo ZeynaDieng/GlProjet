@@ -6,7 +6,8 @@
 
 export const environment = {
   production: false,  // Always false for development environment
-  base_url: 'https://eshop.irwc6611.odns.fr/public/api',
+  // base_url: 'https://eshop.irwc6611.odns.fr/public/api',
+  base_url: 'http://localhost:8000/api',
   base_files_url: '',
   payment_api_key: 'undefined',
   payment_api_secret: 'undefined',

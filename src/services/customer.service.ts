@@ -28,12 +28,26 @@ export class CustomerService {
   
     return this.apiService.get('products', { headers });
   }
+  getMyProductsList(): Observable<any> {
+        return this.apiService.get('products');
+  }
   
-  // getMyConsultantsList(): Observable<any> {
-  //   return this.apiService.get('visitors/list');
-  // }
+  getProductById(productId: number): Observable<any> {
+    const accessToken = getLocalData('accessToken');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    });
+    return this.apiService.get(`products/${productId}`, { headers }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Erreur API :', error);
+        const errorMessage = this.handleHttpError(error);
+        return throwError(() => new Error(errorMessage));
+      })
+    );
+  }
 
-  createUser(userData: any): Observable<any> {
+  createProduct(userData: any): Observable<any> {
     console.log('Request Payload:', userData); 
   
     const accessToken = getLocalData('accessToken');
@@ -51,37 +65,22 @@ export class CustomerService {
   }
 
 
-  
-  updateProduct(productId: number, userData: { status: boolean }): Observable<any> {
+  updateProduct(productId: number, userData: any): Observable<any> {
     const accessToken = this.getAccessToken();
     
-    if (!accessToken) {
-      return throwError(() => new Error('Aucun token d\'accès disponible'));
-    }
-  
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${accessToken}`
+      'Content-Type': 'application/ld+json',
+      'Authorization': `Bearer ${accessToken}`,
+      'Accept': 'application/ld+json'
     });
-
+  
     const body = {
-      status: userData.status 
+      "@id": `/api/products/${productId}`,
+      "@type": "Product",
+      ...userData
     };
   
-   
-  
-    return this.apiService.put(`products/${productId}`, body, { headers }).pipe(
-      catchError((error) => {
-        console.error('Erreur API détaillée:', {
-          status: error.status,
-          message: error.message,
-          error: error.error,
-          url: error.url,
-          headers: error.headers
-        });
-        return throwError(() => error); 
-      })
-    );
+    return this.apiService.put(`products/${productId}`, body, { headers });
   }
   
 

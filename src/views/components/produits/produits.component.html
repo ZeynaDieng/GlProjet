@@ -27,15 +27,12 @@
           </div>
         </ng-container>
   
-        <!-- Affichage réel des produits -->
         <ng-container *ngIf="!isLoading">
           <div *ngFor="let product of products"
                class="group relative bg-white rounded-xl cursor-pointer shadow-md overflow-hidden hover:shadow-xl transition duration-300 border border-blue-50 hover:border-blue-100">
-            <!-- Image -->
             <div class="relative">
               <img [src]="product.imageUrl" [alt]="product.name"
                    class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105">
-              <!-- Badges -->
               <div class="absolute top-3 right-3 space-y-2">
                 <span *ngIf="product.discount" class="block bg-blue-500 text-white text-xs px-2 py-1 rounded-full animate-ping">
                   -{{product.discount}}%
@@ -46,7 +43,6 @@
               </div>
             </div>
   
-            <!-- Infos produit -->
             <div class="p-4">
               <h3 class="font-semibold text-lg text-blue-800 mb-1">{{product.name}}</h3>
               <p class="text-gray-600 text-sm mb-3">{{product.description}}</p>

@@ -72,64 +72,50 @@ export class CreateCustomersComponent {
     
     
      onSubmitUser(): void {
-       console.log('Formulaire soumis');
-       if (this.createUserForm.valid) {
-         const userData = this.createUserForm.value;
-         console.log('Données produits:', userData);
-         if (this.isEditing && this.currentUserId) {
-           this.customerService.updateProduct(this.currentUserId, userData).subscribe({
-             next: (response) => {
-               console.log('produit mis à jour avec succès:', response);
-               this.toast.showSuccess('produit mis à jour avec succès')
-
-               this.userUpdated.emit();
-               this.dialogRef.close();  
-             },
-             error: (error) => {
-              console.error('Erreur lors de la création du produit:', error.error.message);
-              // this.toast.showError(error.error.message);
-
-              const errorDetails = error?.error?.message;
-              
-              if (Array.isArray(errorDetails) && errorDetails.length > 0) {
-                const errorMessages = errorDetails.map(err => err.messages).flat();
-                this.toast.showError(errorMessages.join(', '));
-              } else (error:any) => {
-                this.toast.showError(error.message);
-              }
-            },
-           });
-         } else {
-
-          const userData = this.createUserForm.value;
-          console.log('Données produits:', userData);
-          this.customerService.createUser(userData).subscribe({
+      if (this.createUserForm.valid) {
+        const userData = this.createUserForm.value;
+        
+        if (this.isEditing && this.currentUserId) {
+          this.customerService.updateProduct(this.currentUserId, userData).subscribe({
             next: (response) => {
-              console.log('produit créé avec succès:', response);
-              this.toast.showSuccess('produit créé avec succès')
-              this.userUpdated.emit(); 
-              this.dialogRef.close();   
+              this.toast.showSuccess('Produit mis à jour avec succès');
+              this.userUpdated.emit();
+              this.dialogRef.close();
             },
             error: (error) => {
-              console.error('Erreur lors de la création du produit:', error.error.message);
-              // this.toast.showError(error.error.message);
-
-              const errorDetails = error?.error?.message;
+              console.error('Erreur:', error);
               
-              if (Array.isArray(errorDetails) && errorDetails.length > 0) {
-                const errorMessages = errorDetails.map(err => err.messages).flat();
-                this.toast.showError(errorMessages.join(', '));
-              } else (error:any) => {
-                this.toast.showError(error.message);
+              if (error?.error?.message) {
+                if (Array.isArray(error.error.message)) {
+                  const errorMessages = error.error.message
+                    .map((err: any) => err.messages)
+                    .flat()
+                    .join(', ');
+                  this.toast.showError(errorMessages);
+                } else {
+                  this.toast.showError(error.error.message);
+                }
+              } else {
+                this.toast.showError('Erreur inconnue lors de la mise à jour');
               }
+            }
+          });
+        } else {
+          this.customerService.createProduct(userData).subscribe({
+            next: (response) => {
+              this.toast.showSuccess('Produit créé avec succès');
+              this.userUpdated.emit();
+              this.dialogRef.close();
             },
-         })
-         }
-       } else {
-         console.error('Le formulaire est invalide', this.createUserForm.value);
-         this.toast.showError('Le formulaire est invalide');
-       }
-     }
+            error: (error) => {
+              // Même gestion d'erreur que ci-dessus
+            }
+          });
+        }
+      } else {
+        this.toast.showError('Formulaire invalide');
+      }
+    }
      
      selectedFile: File | null = null;
 
